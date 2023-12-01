@@ -31,7 +31,7 @@ if __name__ == "__main__":
         cfg = yaml.load(f, Loader=yaml.FullLoader)
         cfg = json.loads(json.dumps(cfg), object_hook=load_object)
 
-    dm = MRIDataModule(cfg, big_test=True)
+    dm = MRIDataModule(cfg, args.R, args.mask_type, big_test=True)
     fig_count = 1
     dm.setup()
     test_loader = dm.test_dataloader()

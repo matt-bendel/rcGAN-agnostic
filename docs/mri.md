@@ -36,18 +36,21 @@ need to do so for the training set.
 
 #### Note: You will need to update some hard-coded paths in ```data/mri_data.py```. Incorporating these into an argument remains a TODO.
 
+TODO BELOW
 ## Training
 Training is as simple as running the following command:
 ```python
-python train.py --mri --exp-name rcgan_test --num-gpus X
+python train.py --mri --exp-name rcgan_test --num-gpus X --mask-type 2
 ```
 where ```X``` is the number of GPUs you plan to use. Note that this project uses Weights and Biases (wandb) for logging.
 See [their documentation](https://docs.wandb.ai/quickstart) for instructions on how to setup environment variables.
 Alternatively, you may use a different logger. See PyTorch Lightning's [documentation](https://lightning.ai/docs/pytorch/stable/extensions/logging.html) for options.
 
+The above code will train rcGAN with random masks (guidance is already built-in to the lightning module).
+
 If you need to resume training, use the following command:
 ```python
-python train.py --mri --exp-name rcgan_test --num-gpus X --resume --resume-epoch Y
+python train.py --mri --exp-name rcgan_test --num-gpus X --mask-type 2 --resume --resume-epoch Y
 ```
 where ```Y``` is the epoch to resume from.
 
@@ -62,7 +65,7 @@ Conditonal Frechet Inception Distance ([CFID](https://arxiv.org/abs/2103.11521))
 
 To do so, run the following command:
 ```python
-python /scripts/mri/validate.py --exp-name rcgan_test
+python /scripts/mri/validate.py --exp-name rcgan_test --mask-type 2
 ```
 This script will select the model which has an acceptable PSNR gain (see our paper for details)
 and the lowest CFID. Models which lie outside the acceptable PSNR gain are automatically
@@ -73,20 +76,20 @@ Once completed, all other checkpoints will automatically be deleted.
 ## Testing
 To test the model's PSNR, SSIM, LPIPS, DISTS, and APSD, execute the following command:
 ```python
-python /scripts/mri/test.py --exp-name rcgan_test
+python /scripts/mri/test.py --exp-name rcgan_test --mask-type 1 --R X
 ```
-This will test all aforementioned metrics on the average reconstruction for 1, 2, 4, 8, 16, and 32 samples.
+This will test all aforementioned metrics on the average reconstruction for 1, 2, 4, 8, 16, and 32 samples at an acceleration rate of X.
 
 ## Plot
 To generate figures similar to those found in our paper, execute the following command:
 ```python
-python /scripts/mri/test.py --exp-name rcgan_test --num-figs 5
+python /scripts/mri/test.py --exp-name rcgan_test --num-figs 5 --mask-type 1 --R X
 ```
 where ```--num-figs``` controls the number of figures to generate. This script generates two different
 kinds of figures:
 1. A global figure which features the 32-sample avg. reconstruction, error map, and std. deviation map.
 2. A figure which focuses on a randomly selected zoomed region. This figure shows the 32-, 4-, and 2-sample average
-reconstructions, as well as 2 individual samples.
+reconstructions, as well as 2 individual samples. This will be done for the GRO mask at an acceleration rate of X.
 
 The figures are saved in ```figures/mri```.
 

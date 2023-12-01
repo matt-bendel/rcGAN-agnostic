@@ -53,7 +53,7 @@ if __name__ == "__main__":
         cfg = json.loads(json.dumps(cfg), object_hook=load_object)
 
     cfg.batch_size = cfg.batch_size * 4
-    dm = MRIDataModule(cfg, big_test=True)
+    dm = MRIDataModule(cfg, args.R, args.mask_type, big_test=True)
 
     dm.setup()
 

@@ -1,4 +1,4 @@
-# A Regularized Conditional GAN for Posterior Sampling in Inverse Problems [[arXiv]](https://arxiv.org/abs/2210.13389)
+# Mask-Agnostic Posterior Sampling MRI via Conditional GANs with Guided Reconstruction [[paper]](https://openreview.net/forum?id=AopY31LYgO)
 ## Setup
 See ```docs/setup.md``` for basic environment setup instructions.
 
@@ -6,18 +6,8 @@ See ```docs/setup.md``` for basic environment setup instructions.
 ### MRI
 See ```docs/mri.md``` for instructions on how to setup and reproduce our MRI results.
 
-## Extending the Code
-See ```docs/new_applications.md``` for basic instructions on how to extend the code to your application.
-
 ## Questions and Concerns
 If you have any questions, or run into any issues, don't hesitate to reach out at bendel.8@osu.edu.
-
-## TODO
-- [x] Migrate to PyTorch Lightning
-- [x] Reimplement MRI rcGAN
-- [x] Update MRI experiment to R=8
-- [ ] Reimplement inpainting rcGAN
-- [ ] Extend to super resolution
 
 ## References
 This repository contains code from the following works, which should be cited:
@@ -63,10 +53,10 @@ This repository contains code from the following works, which should be cited:
 ## Citation
 If you find this code helpful, please cite our paper:
 ```
-@journal{bendel2022arxiv,
+@journal{Bendel:NIPSW:23,
   author = {Bendel, Matthew and Ahmad, Rizwan and Schniter, Philip},
-  title = {A Regularized Conditional {GAN} for Posterior Sampling in Inverse Problems},
-  year = {2022},
-  journal={arXiv:2210.13389}
+  title = {Mask-Agnostic Posterior Sampling MRI via Conditional GANs with Guided Reconstruction},
+  year = {2023},
+  journal={NeurIPS 2023 Deep Inverse Workshop}
 }
 ```
